@@ -9,9 +9,7 @@
  */
 #include <rtthread.h>
 #include <rtdevice.h>
-#include "sensor.h"
-#include "sensor_ti_ina260.h"
-
+#include "ti_ina260_sensor_v1.h"
 #include "stdio.h"
 
 

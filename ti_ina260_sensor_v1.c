@@ -8,7 +8,7 @@
  * 2021-01-30     xph    first version
  */
 
-#include "sensor_ti_ina260.h"
+#include "ti_ina260_sensor_v1.h"
 #include "ina260.h"
 
 #include "stdint.h"
@@ -77,7 +77,7 @@ static rt_size_t ina260_polling_get_data(rt_sensor_t sensor, struct rt_sensor_da
     return 1;
 }
 
-static rt_size_t ina260_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
+static RT_SIZE_TYPE ina260_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
 {
     RT_ASSERT(buf);
 
@@ -122,7 +122,7 @@ int rt_hw_ina260_init(const char *name, struct rt_sensor_config *cfg)
     rt_memset(&device, 0, sizeof(struct _rt_ina260_device_t));
     if (cfg->intf.user_data)
     {
-        device.addr = (uint8_t)(cfg->intf.user_data);
+        device.addr = (uint8_t)(uintptr_t)(cfg->intf.user_data);
     }
 
     device.bus = (struct rt_i2c_bus_device *)rt_device_find(cfg->intf.dev_name);
